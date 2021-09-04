@@ -1,0 +1,39 @@
+{
+  "name": "website",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "base-ui website",
+  "main": "/src/main.js",
+  "scripts": {
+    "dev": "vue-cli-service serve src/main.js"
+  },
+  "dependencies": {
+    "base-ui":"1.0.0",
+    "mitt": "^2.1.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.7",
+    "css-loader": "^2.1.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "json-templater": "^1.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "uppercamelcase": "^3.0.0",
+    "md-loader": "1.0.0",
+    "url-loader": "^1.0.1",
+    "vue-loader": "^16.0.0",
+    "vue-router": "^4.0.0-beta.3"
+  },
+  "author": "",
+  "license": "ISC"
+}
