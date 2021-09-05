@@ -1,7 +1,7 @@
 import {
   createComponent,
   unmountComponent
-} from 'main/composables/component.js'
+} from '../../../src/composables/component.js'
 
 describe('component', () => {
   describe('createComponent', () => {
