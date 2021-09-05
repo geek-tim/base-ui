@@ -1,22 +1,44 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jest-environment-jsdom-sixteen',
-  setupFilesAfterEnv: ['./scripts/setupJestEnv.js'],
-  roots: ['<rootDir>/src', '<rootDir>/packages', '<rootDir>/tests'],
-  transform: {
-    '^.+\\.vue$': 'vue-jest',
-    '^.+\\js$': 'babel-jest'
+  globals: {
+    // work around: https://github.com/kulshekhar/ts-jest/issues/748#issuecomment-423528659
+    'ts-jest': {
+      diagnostics: {
+        ignoreCodes: [151001]
+      }
+    }
   },
-  moduleFileExtensions: ['vue', 'js', 'json', 'jsx', 'ts', 'tsx', 'node'],
+  testEnvironment: 'jsdom',
   testMatch: [
     '**/tests/**/?(*.)+(test).[jt]s?(x)',
     '**/tests/**/*spec.[jt]s?(x)',
     '**/__tests__/**/*.spec.js'
   ],
-  moduleNameMapper: {
-    '^element-ui(.*)$': '<rootDir>$1',
-    '^main(.*)$': '<rootDir>/src$1',
-    '^lodash-es$': 'lodash'
+  transform: {
+    '^.+\\.vue$': 'vue-jest',
+    '^.+\\.(t|j)sx?$': [
+      'babel-jest',
+      {
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: {
+                node: true
+              }
+            }
+          ],
+          '@babel/preset-typescript'
+        ],
+        plugins: [
+          '@vue/babel-plugin-jsx',
+          '@babel/plugin-proposal-class-properties'
+        ]
+      }
+    ]
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)']
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  // u can change this option to a more specific folder for test single component or util when dev
+  // for example, ['<rootDir>/packages/input']
+  roots: ['<rootDir>/src', '<rootDir>/packages', '<rootDir>/tests']
 }
