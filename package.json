@@ -26,7 +26,24 @@
     "core-js": "^3.6.5",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "vue-loader": "16.0.0"
+    "vue-loader": "16.0.0",
+    "chalk": "^4.1.0",
+    "lint-staged": "^10.5.3",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "commit-msg": "node scripts/verifyCommit.js",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint",
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "eslint",
+      "prettier --parser=typescript --write"
+    ]
   },
   "eslintConfig": {
     "root": true,
