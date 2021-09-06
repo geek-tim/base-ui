@@ -8,6 +8,7 @@
     "lint": "eslint --ext .js --ext .vue --ext .ts packages/element3/packages/** packages/*/src/** --no-error-on-unmatched-pattern",
     "release": "node scripts/release.js",
     "test": "yarn workspace @geek-tim/base-ui test",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "test:coverage": "yarn workspace @geek-tim/base-ui test:coverage"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@vue/component-compiler-utils": "3.1.2",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
+    "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.15.0",
     "eslint-plugin-json": "^2.1.2",
     "eslint-plugin-prettier": "^3.2.0",
