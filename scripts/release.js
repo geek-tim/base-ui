@@ -13,6 +13,7 @@ const run = (bin, args, opts = {}) =>
 const dryRun = (bin, args, opts = {}) =>
   console.log(chalk.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts)
 const runIfNotDry = isDryRun ? dryRun : run
+const pkgName = '@geek-tim/base-ui'
 
 ;(async function main() {
   const { yes } = await prompt({
@@ -23,23 +24,23 @@ const runIfNotDry = isDryRun ? dryRun : run
 
   if (!yes) return
 
-  step('\nRunning base-ui tests...')
-  await run('yarn', ['workspace', 'base-ui', 'test'])
+  step(`\nRunning ${pkgName} tests...`)
+  await run('yarn', ['workspace', `${pkgName}`, 'test'])
 
-  step('\nBuilding base-ui...')
-  await run('yarn', ['workspace', 'base-ui', 'build'])
+  step(`\nBuilding ${pkgName}...`)
+  await run('yarn', ['workspace', `${pkgName}`, 'build'])
 
-  step('\nUpdate base-ui version...')
+  step(`\nUpdate ${pkgName} version...`)
   await run('yarn', [
     'workspace',
-    'base-ui',
+    `${pkgName}`,
     'version',
     '--new-version',
     targetVersion,
     '--no-git-tag-version'
   ])
 
-  step('\nUpdating base-ui cross dependencies...')
+  step(`\nUpdating ${pkgName} cross dependencies...`)
   updatePackageVersion(targetVersion)
 
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
@@ -51,7 +52,7 @@ const runIfNotDry = isDryRun ? dryRun : run
     console.log('No changes to commit.')
   }
 
-  step('\nPublishing base-ui package...')
+  step(`\nPublishing ${pkgName} package...`)
 
   await runIfNotDry(
     'yarn',
@@ -106,7 +107,7 @@ function updateDeps(packageJson, depType, version) {
   if (!dependencies) return
 
   Object.keys(dependencies).forEach(key => {
-    if (key === 'base-ui') {
+    if (key === `${pkgName}`) {
       dependencies[key] = version
     }
   })

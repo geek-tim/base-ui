@@ -1,5 +1,4 @@
 {
-  "version": "0.1.0",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -8,8 +7,8 @@
     "dev#website": "yarn workspace website dev",
     "lint": "eslint --ext .js --ext .vue --ext .ts packages/element3/packages/** packages/*/src/** --no-error-on-unmatched-pattern",
     "release": "node scripts/release.js",
-    "test": "yarn workspace base-ui test",
-    "test:coverage": "yarn workspace base-ui test:coverage"
+    "test": "yarn workspace @geek-tim/base-ui test",
+    "test:coverage": "yarn workspace @geek-tim/base-ui test:coverage"
   },
   "dependencies": {
     "vue": "^3.0.0"
@@ -52,8 +51,7 @@
       "prettier --write"
     ],
     "*.ts?(x)": [
-      "eslint",
-      "prettier --parser=typescript --write"
+      "eslint"
     ]
   },
   "browserslist": [
