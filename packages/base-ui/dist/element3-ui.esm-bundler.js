@@ -1,16 +1,47 @@
 /*!
-  * base-ui v1.0.0
-  * (c) 2021 kkb
-  * @license MIT
-  */
-import { toRefs, ref, computed, openBlock, createBlock, Transition, withCtx, withDirectives, createElementVNode, normalizeClass, createElementBlock, createCommentVNode, renderSlot, createTextVNode, toDisplayString, vShow, provide, getCurrentInstance, h, reactive, createVNode, onUnmounted, isVNode, onMounted, nextTick, resolveComponent, withModifiers, normalizeStyle } from 'vue';
+ * @geek-tim/base-ui v0.0.2
+ * (c) 2021 kkb
+ * @license MIT
+ */
+import {
+  toRefs,
+  ref,
+  computed,
+  openBlock,
+  createBlock,
+  Transition,
+  withCtx,
+  withDirectives,
+  createElementVNode,
+  normalizeClass,
+  createElementBlock,
+  createCommentVNode,
+  renderSlot,
+  createTextVNode,
+  toDisplayString,
+  vShow,
+  provide,
+  getCurrentInstance,
+  h,
+  defineComponent,
+  inject,
+  reactive,
+  createVNode,
+  onUnmounted,
+  isVNode,
+  onMounted,
+  nextTick,
+  resolveComponent,
+  withModifiers,
+  normalizeStyle
+} from 'vue'
 
 const TYPE_CLASSES_MAP = {
   success: 'el-icon-success',
   warning: 'el-icon-warning',
   error: 'el-icon-error'
-};
-var script$2 = {
+}
+var script$3 = {
   name: 'ElAlert',
   props: {
     title: {
@@ -38,40 +69,34 @@ var script$2 = {
     effect: {
       type: String,
       default: 'light',
-      validator: function (value) {
-        return ['light', 'dark'].indexOf(value) !== -1;
+      validator: function(value) {
+        return ['light', 'dark'].indexOf(value) !== -1
       }
     }
   },
   emits: ['close'],
 
-  setup(props, {
-    emit,
-    slots
-  }) {
-    const {
-      description,
-      type
-    } = toRefs(props);
-    const visible = ref(true);
+  setup(props, { emit, slots }) {
+    const { description, type } = toRefs(props)
+    const visible = ref(true)
 
     const close = () => {
-      visible.value = false;
-      emit('close');
-    };
+      visible.value = false
+      emit('close')
+    }
 
     const typeClass = computed(() => {
-      return `el-alert--${type.value}`;
-    });
+      return `el-alert--${type.value}`
+    })
     const iconClass = computed(() => {
-      return TYPE_CLASSES_MAP[type.value] || 'el-icon-info';
-    });
+      return TYPE_CLASSES_MAP[type.value] || 'el-icon-info'
+    })
     const isBigIcon = computed(() => {
-      return description.value || slots.default ? 'is-big' : '';
-    });
+      return description.value || slots.default ? 'is-big' : ''
+    })
     const isBoldTitle = computed(() => {
-      return description.value || slots.default ? 'is-bold' : '';
-    });
+      return description.value || slots.default ? 'is-bold' : ''
+    })
     return {
       visible,
       typeClass,
@@ -79,68 +104,148 @@ var script$2 = {
       isBigIcon,
       isBoldTitle,
       close
-    };
+    }
   }
-
-};
-
-const _hoisted_1 = {
-  class: "el-alert__content"
-};
-const _hoisted_2 = {
-  key: 1,
-  class: "el-alert__description"
-};
-const _hoisted_3 = {
-  key: 2,
-  class: "el-alert__description"
-};
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(Transition, {
-    name: "el-alert-fade"
-  }, {
-    default: withCtx(() => [withDirectives(createElementVNode("div", {
-      class: normalizeClass(["el-alert", [$setup.typeClass, $props.center ? 'is-center' : '', 'is-' + $props.effect]]),
-      role: "alert"
-    }, [$props.showIcon ? (openBlock(), createElementBlock("i", {
-      key: 0,
-      class: normalizeClass(["el-alert__icon", [$setup.iconClass, $setup.isBigIcon]])
-    }, null, 2
-    /* CLASS */
-    )) : createCommentVNode("v-if", true), createElementVNode("div", _hoisted_1, [$props.title || _ctx.$slots.title ? (openBlock(), createElementBlock("span", {
-      key: 0,
-      class: normalizeClass(["el-alert__title", [$setup.isBoldTitle]])
-    }, [renderSlot(_ctx.$slots, "title", {}, () => [createTextVNode(toDisplayString($props.title), 1
-    /* TEXT */
-    )])], 2
-    /* CLASS */
-    )) : createCommentVNode("v-if", true), _ctx.$slots.default && !$props.description ? (openBlock(), createElementBlock("p", _hoisted_2, [renderSlot(_ctx.$slots, "default")])) : createCommentVNode("v-if", true), $props.description && !_ctx.$slots.default ? (openBlock(), createElementBlock("p", _hoisted_3, toDisplayString($props.description), 1
-    /* TEXT */
-    )) : createCommentVNode("v-if", true), withDirectives(createElementVNode("i", {
-      class: normalizeClass(["el-alert__closebtn", {
-        'is-customed': $props.closeText !== '',
-        'el-icon-close': $props.closeText === ''
-      }]),
-      onClick: _cache[0] || (_cache[0] = (...args) => $setup.close && $setup.close(...args))
-    }, toDisplayString($props.closeText), 3
-    /* TEXT, CLASS */
-    ), [[vShow, $props.closable]])])], 2
-    /* CLASS */
-    ), [[vShow, $setup.visible]])]),
-    _: 3
-    /* FORWARDED */
-
-  });
 }
 
-script$2.render = render$2;
-script$2.__file = "packages/alert/Alert.vue";
+const _hoisted_1$1 = {
+  class: 'el-alert__content'
+}
+const _hoisted_2$1 = {
+  key: 1,
+  class: 'el-alert__description'
+}
+const _hoisted_3$1 = {
+  key: 2,
+  class: 'el-alert__description'
+}
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return (
+    openBlock(),
+    createBlock(
+      Transition,
+      {
+        name: 'el-alert-fade'
+      },
+      {
+        default: withCtx(() => [
+          withDirectives(
+            createElementVNode(
+              'div',
+              {
+                class: normalizeClass([
+                  'el-alert',
+                  [
+                    $setup.typeClass,
+                    $props.center ? 'is-center' : '',
+                    'is-' + $props.effect
+                  ]
+                ]),
+                role: 'alert'
+              },
+              [
+                $props.showIcon
+                  ? (openBlock(),
+                    createElementBlock(
+                      'i',
+                      {
+                        key: 0,
+                        class: normalizeClass([
+                          'el-alert__icon',
+                          [$setup.iconClass, $setup.isBigIcon]
+                        ])
+                      },
+                      null,
+                      2
+                      /* CLASS */
+                    ))
+                  : createCommentVNode('v-if', true),
+                createElementVNode('div', _hoisted_1$1, [
+                  $props.title || _ctx.$slots.title
+                    ? (openBlock(),
+                      createElementBlock(
+                        'span',
+                        {
+                          key: 0,
+                          class: normalizeClass([
+                            'el-alert__title',
+                            [$setup.isBoldTitle]
+                          ])
+                        },
+                        [
+                          renderSlot(_ctx.$slots, 'title', {}, () => [
+                            createTextVNode(
+                              toDisplayString($props.title),
+                              1
+                              /* TEXT */
+                            )
+                          ])
+                        ],
+                        2
+                        /* CLASS */
+                      ))
+                    : createCommentVNode('v-if', true),
+                  _ctx.$slots.default && !$props.description
+                    ? (openBlock(),
+                      createElementBlock('p', _hoisted_2$1, [
+                        renderSlot(_ctx.$slots, 'default')
+                      ]))
+                    : createCommentVNode('v-if', true),
+                  $props.description && !_ctx.$slots.default
+                    ? (openBlock(),
+                      createElementBlock(
+                        'p',
+                        _hoisted_3$1,
+                        toDisplayString($props.description),
+                        1
+                        /* TEXT */
+                      ))
+                    : createCommentVNode('v-if', true),
+                  withDirectives(
+                    createElementVNode(
+                      'i',
+                      {
+                        class: normalizeClass([
+                          'el-alert__closebtn',
+                          {
+                            'is-customed': $props.closeText !== '',
+                            'el-icon-close': $props.closeText === ''
+                          }
+                        ]),
+                        onClick:
+                          _cache[0] ||
+                          (_cache[0] = (...args) =>
+                            $setup.close && $setup.close(...args))
+                      },
+                      toDisplayString($props.closeText),
+                      3
+                      /* TEXT, CLASS */
+                    ),
+                    [[vShow, $props.closable]]
+                  )
+                ])
+              ],
+              2
+              /* CLASS */
+            ),
+            [[vShow, $setup.visible]]
+          )
+        ]),
+        _: 3
+        /* FORWARDED */
+      }
+    )
+  )
+}
+
+script$3.render = render$3
+script$3.__file = 'packages/alert/Alert.vue'
 
 /* istanbul ignore next */
 
-script$2.install = function (app) {
-  app.component(script$2.name, script$2);
-};
+script$3.install = function(app) {
+  app.component(script$3.name, script$3)
+}
 
 var ElRow = {
   name: 'ElRow',
@@ -148,19 +253,19 @@ var ElRow = {
 
   setup(props) {
     const style = computed(() => {
-      const ret = {};
+      const ret = {}
 
       if (props.gutter) {
-        ret.marginLeft = `-${props.gutter / 2}px`;
-        ret.marginRight = ret.marginLeft;
+        ret.marginLeft = `-${props.gutter / 2}px`
+        ret.marginRight = ret.marginLeft
       }
 
-      return ret;
-    });
-    provide('el-row', getCurrentInstance());
+      return ret
+    })
+    provide('el-row', getCurrentInstance())
     return {
       style
-    };
+    }
   },
 
   props: {
@@ -184,21 +289,198 @@ var ElRow = {
   },
 
   render() {
-    return h(this.tag, {
-      class: ['el-row', this.justify !== 'start' ? `is-justify-${this.justify}` : '', this.align !== 'top' ? `is-align-${this.align}` : '', {
-        'el-row--flex': this.type === 'flex'
-      }],
-      style: this.style
-    }, this.$slots.default && this.$slots.default());
+    return h(
+      this.tag,
+      {
+        class: [
+          'el-row',
+          this.justify !== 'start' ? `is-justify-${this.justify}` : '',
+          this.align !== 'top' ? `is-align-${this.align}` : '',
+          {
+            'el-row--flex': this.type === 'flex'
+          }
+        ],
+        style: this.style
+      },
+      this.$slots.default && this.$slots.default()
+    )
   }
-
-};
+}
 
 /* istanbul ignore next */
 
-ElRow.install = function (app) {
-  app.component(ElRow.name, ElRow);
-};
+ElRow.install = function(app) {
+  app.component(ElRow.name, ElRow)
+}
+
+var props = {
+  size: {
+    type: String,
+    validator: function(val) {
+      return ['medium', 'small', 'mini', ''].includes(val)
+    }
+  },
+  type: {
+    type: String,
+    validator: function(val) {
+      return [
+        'primary',
+        'success',
+        'warning',
+        'danger',
+        'info',
+        'text'
+      ].includes(val)
+    }
+  },
+  nativeType: {
+    type: String,
+    default: 'button'
+  },
+  plain: Boolean,
+  round: Boolean,
+  circle: Boolean,
+  loading: Boolean,
+  disabled: Boolean,
+  icon: String
+}
+
+/**
+ * get globalOptions $ELEMENT config object
+ */
+
+function useGlobalOptions() {
+  const instance = getCurrentInstance()
+
+  if (!instance) {
+    console.warn('useGlobalOptions must be call in setup function')
+    return
+  }
+
+  return instance.appContext.config.globalProperties.$ELEMENT || {}
+}
+
+var script$2 = defineComponent({
+  name: 'ElButton',
+  props: props,
+  setup: function(props) {
+    var _a = toRefs(props),
+      size = _a.size,
+      disabled = _a.disabled
+
+    var buttonSize = useButtonSize(size)
+    var buttonDisabled = useButtonDisabled(disabled)
+    var classes = useClasses({
+      props: props,
+      size: buttonSize,
+      disabled: buttonDisabled
+    })
+    return {
+      buttonDisabled: buttonDisabled,
+      classes: classes
+    }
+  }
+})
+
+var useClasses = function(_a) {
+  var props = _a.props,
+    size = _a.size,
+    disabled = _a.disabled
+  return computed(function() {
+    return [
+      size.value ? 'el-button--' + size.value : '',
+      props.type ? 'el-button--' + props.type : '',
+      {
+        'is-plain': props.plain,
+        'is-round': props.round,
+        'is-circle': props.circle,
+        'is-loading': props.loading,
+        'is-disabled': disabled.value
+      }
+    ]
+  })
+}
+
+var useButtonDisabled = function(disabled) {
+  return computed(function() {
+    var elForm = inject('elForm', null)
+    return (
+      (disabled === null || disabled === void 0 ? void 0 : disabled.value) ||
+      (elForm === null || elForm === void 0 ? void 0 : elForm.disabled)
+    )
+  })
+}
+
+var useButtonSize = function(size) {
+  var globalConfig = useGlobalOptions()
+  return computed(function() {
+    var elFormItem = inject('elFormItem', null)
+    return (
+      (size === null || size === void 0 ? void 0 : size.value) ||
+      (elFormItem === null || elFormItem === void 0
+        ? void 0
+        : elFormItem.elFormItemSize) ||
+      globalConfig.size
+    )
+  })
+}
+
+const _hoisted_1 = ['type', 'disabled']
+const _hoisted_2 = {
+  key: 0,
+  class: 'el-icon-loading',
+  'data-testid': 'loadingIcon'
+}
+const _hoisted_3 = {
+  key: 2
+}
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return (
+    openBlock(),
+    createElementBlock(
+      'button',
+      {
+        class: normalizeClass(['el-button', _ctx.classes]),
+        type: _ctx.nativeType,
+        disabled: _ctx.buttonDisabled || _ctx.loading
+      },
+      [
+        _ctx.loading
+          ? (openBlock(), createElementBlock('i', _hoisted_2))
+          : _ctx.icon
+          ? (openBlock(),
+            createElementBlock(
+              'i',
+              {
+                key: 1,
+                class: normalizeClass(_ctx.icon),
+                'data-testid': 'icon'
+              },
+              null,
+              2
+              /* CLASS */
+            ))
+          : createCommentVNode('v-if', true),
+        _ctx.$slots.default
+          ? (openBlock(),
+            createElementBlock('span', _hoisted_3, [
+              renderSlot(_ctx.$slots, 'default')
+            ]))
+          : createCommentVNode('v-if', true)
+      ],
+      10,
+      /* CLASS, PROPS */
+      _hoisted_1
+    )
+  )
+}
+
+script$2.render = render$2
+script$2.__file = 'src/components/Button/src/Button.vue'
+
+script$2.install = function(app) {
+  app.component(script$2.name, script$2)
+}
 
 /**
  * A collection of shims that provide minimal functionality of the ES6 collections.
@@ -208,9 +490,9 @@ ElRow.install = function (app) {
  */
 
 /* eslint-disable require-jsdoc, valid-jsdoc */
-var MapShim = function () {
+var MapShim = (function() {
   if (typeof Map !== 'undefined') {
-    return Map;
+    return Map
   }
   /**
    * Returns index in provided array that matches the specified key.
@@ -220,136 +502,131 @@ var MapShim = function () {
    * @returns {number}
    */
 
-
   function getIndex(arr, key) {
-    var result = -1;
-    arr.some(function (entry, index) {
+    var result = -1
+    arr.some(function(entry, index) {
       if (entry[0] === key) {
-        result = index;
-        return true;
+        result = index
+        return true
       }
 
-      return false;
-    });
-    return result;
+      return false
+    })
+    return result
   }
 
-  return function () {
+  return (function() {
     function class_1() {
-      this.__entries__ = [];
+      this.__entries__ = []
     }
 
-    Object.defineProperty(class_1.prototype, "size", {
+    Object.defineProperty(class_1.prototype, 'size', {
       /**
        * @returns {boolean}
        */
-      get: function () {
-        return this.__entries__.length;
+      get: function() {
+        return this.__entries__.length
       },
       enumerable: true,
       configurable: true
-    });
+    })
     /**
      * @param {*} key
      * @returns {*}
      */
 
-    class_1.prototype.get = function (key) {
-      var index = getIndex(this.__entries__, key);
-      var entry = this.__entries__[index];
-      return entry && entry[1];
-    };
+    class_1.prototype.get = function(key) {
+      var index = getIndex(this.__entries__, key)
+      var entry = this.__entries__[index]
+      return entry && entry[1]
+    }
     /**
      * @param {*} key
      * @param {*} value
      * @returns {void}
      */
 
-
-    class_1.prototype.set = function (key, value) {
-      var index = getIndex(this.__entries__, key);
+    class_1.prototype.set = function(key, value) {
+      var index = getIndex(this.__entries__, key)
 
       if (~index) {
-        this.__entries__[index][1] = value;
+        this.__entries__[index][1] = value
       } else {
-        this.__entries__.push([key, value]);
+        this.__entries__.push([key, value])
       }
-    };
+    }
     /**
      * @param {*} key
      * @returns {void}
      */
 
-
-    class_1.prototype.delete = function (key) {
-      var entries = this.__entries__;
-      var index = getIndex(entries, key);
+    class_1.prototype.delete = function(key) {
+      var entries = this.__entries__
+      var index = getIndex(entries, key)
 
       if (~index) {
-        entries.splice(index, 1);
+        entries.splice(index, 1)
       }
-    };
+    }
     /**
      * @param {*} key
      * @returns {void}
      */
 
-
-    class_1.prototype.has = function (key) {
-      return !!~getIndex(this.__entries__, key);
-    };
+    class_1.prototype.has = function(key) {
+      return !!~getIndex(this.__entries__, key)
+    }
     /**
      * @returns {void}
      */
 
-
-    class_1.prototype.clear = function () {
-      this.__entries__.splice(0);
-    };
+    class_1.prototype.clear = function() {
+      this.__entries__.splice(0)
+    }
     /**
      * @param {Function} callback
      * @param {*} [ctx=null]
      * @returns {void}
      */
 
-
-    class_1.prototype.forEach = function (callback, ctx) {
+    class_1.prototype.forEach = function(callback, ctx) {
       if (ctx === void 0) {
-        ctx = null;
+        ctx = null
       }
 
       for (var _i = 0, _a = this.__entries__; _i < _a.length; _i++) {
-        var entry = _a[_i];
-        callback.call(ctx, entry[1], entry[0]);
+        var entry = _a[_i]
+        callback.call(ctx, entry[1], entry[0])
       }
-    };
+    }
 
-    return class_1;
-  }();
-}();
+    return class_1
+  })()
+})()
 /**
  * Detects whether window and document objects are available in current environment.
  */
 
+var isBrowser =
+  typeof window !== 'undefined' &&
+  typeof document !== 'undefined' &&
+  window.document === document // Returns global object of a current environment.
 
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document; // Returns global object of a current environment.
-
-var global$1 = function () {
+var global$1 = (function() {
   if (typeof global !== 'undefined' && global.Math === Math) {
-    return global;
+    return global
   }
 
   if (typeof self !== 'undefined' && self.Math === Math) {
-    return self;
+    return self
   }
 
   if (typeof window !== 'undefined' && window.Math === Math) {
-    return window;
+    return window
   } // eslint-disable-next-line no-new-func
 
-
-  return Function('return this')();
-}();
+  return Function('return this')()
+})()
 /**
  * A shim for the requestAnimationFrame which falls back to the setTimeout if
  * first one is not supported.
@@ -357,24 +634,22 @@ var global$1 = function () {
  * @returns {number} Requests' identifier.
  */
 
-
-var requestAnimationFrame$1 = function () {
+var requestAnimationFrame$1 = (function() {
   if (typeof requestAnimationFrame === 'function') {
     // It's required to use a bounded function because IE sometimes throws
     // an "Invalid calling object" error if rAF is invoked without the global
     // object on the left hand side.
-    return requestAnimationFrame.bind(global$1);
+    return requestAnimationFrame.bind(global$1)
   }
 
-  return function (callback) {
-    return setTimeout(function () {
-      return callback(Date.now());
-    }, 1000 / 60);
-  };
-}(); // Defines minimum timeout before adding a trailing call.
+  return function(callback) {
+    return setTimeout(function() {
+      return callback(Date.now())
+    }, 1000 / 60)
+  }
+})() // Defines minimum timeout before adding a trailing call.
 
-
-var trailingTimeout = 2;
+var trailingTimeout = 2
 /**
  * Creates a wrapper function which ensures that provided callback will be
  * invoked only once during the specified delay period.
@@ -386,8 +661,8 @@ var trailingTimeout = 2;
 
 function throttle$1(callback, delay) {
   var leadingCall = false,
-      trailingCall = false,
-      lastCallTime = 0;
+    trailingCall = false,
+    lastCallTime = 0
   /**
    * Invokes the original callback function and schedules new invocation if
    * the "proxy" was called during current request.
@@ -397,12 +672,12 @@ function throttle$1(callback, delay) {
 
   function resolvePending() {
     if (leadingCall) {
-      leadingCall = false;
-      callback();
+      leadingCall = false
+      callback()
     }
 
     if (trailingCall) {
-      proxy();
+      proxy()
     }
   }
   /**
@@ -413,9 +688,8 @@ function throttle$1(callback, delay) {
    * @returns {void}
    */
 
-
   function timeoutCallback() {
-    requestAnimationFrame$1(resolvePending);
+    requestAnimationFrame$1(resolvePending)
   }
   /**
    * Schedules invocation of the original function.
@@ -423,45 +697,51 @@ function throttle$1(callback, delay) {
    * @returns {void}
    */
 
-
   function proxy() {
-    var timeStamp = Date.now();
+    var timeStamp = Date.now()
 
     if (leadingCall) {
       // Reject immediately following calls.
       if (timeStamp - lastCallTime < trailingTimeout) {
-        return;
+        return
       } // Schedule new call to be in invoked when the pending one is resolved.
       // This is important for "transitions" which never actually start
       // immediately so there is a chance that we might miss one if change
       // happens amids the pending invocation.
 
-
-      trailingCall = true;
+      trailingCall = true
     } else {
-      leadingCall = true;
-      trailingCall = false;
-      setTimeout(timeoutCallback, delay);
+      leadingCall = true
+      trailingCall = false
+      setTimeout(timeoutCallback, delay)
     }
 
-    lastCallTime = timeStamp;
+    lastCallTime = timeStamp
   }
 
-  return proxy;
+  return proxy
 } // Minimum delay before invoking the update of observers.
 
-
-var REFRESH_DELAY = 20; // A list of substrings of CSS properties used to find transition events that
+var REFRESH_DELAY = 20 // A list of substrings of CSS properties used to find transition events that
 // might affect dimensions of observed elements.
 
-var transitionKeys = ['top', 'right', 'bottom', 'left', 'width', 'height', 'size', 'weight']; // Check if MutationObserver is available.
+var transitionKeys = [
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'width',
+  'height',
+  'size',
+  'weight'
+] // Check if MutationObserver is available.
 
-var mutationObserverSupported = typeof MutationObserver !== 'undefined';
+var mutationObserverSupported = typeof MutationObserver !== 'undefined'
 /**
  * Singleton controller class which handles updates of ResizeObserver instances.
  */
 
-var ResizeObserverController = function () {
+var ResizeObserverController = (function() {
   /**
    * Creates a new instance of ResizeObserverController.
    *
@@ -473,30 +753,30 @@ var ResizeObserverController = function () {
      *
      * @private {boolean}
      */
-    this.connected_ = false;
+    this.connected_ = false
     /**
      * Tells that controller has subscribed for Mutation Events.
      *
      * @private {boolean}
      */
 
-    this.mutationEventsAdded_ = false;
+    this.mutationEventsAdded_ = false
     /**
      * Keeps reference to the instance of MutationObserver.
      *
      * @private {MutationObserver}
      */
 
-    this.mutationsObserver_ = null;
+    this.mutationsObserver_ = null
     /**
      * A list of connected observers.
      *
      * @private {Array<ResizeObserverSPI>}
      */
 
-    this.observers_ = [];
-    this.onTransitionEnd_ = this.onTransitionEnd_.bind(this);
-    this.refresh = throttle$1(this.refresh.bind(this), REFRESH_DELAY);
+    this.observers_ = []
+    this.onTransitionEnd_ = this.onTransitionEnd_.bind(this)
+    this.refresh = throttle$1(this.refresh.bind(this), REFRESH_DELAY)
   }
   /**
    * Adds observer to observers list.
@@ -505,17 +785,15 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.addObserver = function (observer) {
+  ResizeObserverController.prototype.addObserver = function(observer) {
     if (!~this.observers_.indexOf(observer)) {
-      this.observers_.push(observer);
+      this.observers_.push(observer)
     } // Add listeners if they haven't been added yet.
 
-
     if (!this.connected_) {
-      this.connect_();
+      this.connect_()
     }
-  };
+  }
   /**
    * Removes observer from observers list.
    *
@@ -523,20 +801,18 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.removeObserver = function (observer) {
-    var observers = this.observers_;
-    var index = observers.indexOf(observer); // Remove observer if it's present in registry.
+  ResizeObserverController.prototype.removeObserver = function(observer) {
+    var observers = this.observers_
+    var index = observers.indexOf(observer) // Remove observer if it's present in registry.
 
     if (~index) {
-      observers.splice(index, 1);
+      observers.splice(index, 1)
     } // Remove listeners if controller has no connected observers.
 
-
     if (!observers.length && this.connected_) {
-      this.disconnect_();
+      this.disconnect_()
     }
-  };
+  }
   /**
    * Invokes the update of observers. It will continue running updates insofar
    * it detects changes.
@@ -544,15 +820,14 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.refresh = function () {
-    var changesDetected = this.updateObservers_(); // Continue running updates if changes have been detected as there might
+  ResizeObserverController.prototype.refresh = function() {
+    var changesDetected = this.updateObservers_() // Continue running updates if changes have been detected as there might
     // be future ones caused by CSS transitions.
 
     if (changesDetected) {
-      this.refresh();
+      this.refresh()
     }
-  };
+  }
   /**
    * Updates every observer from observers list and notifies them of queued
    * entries.
@@ -562,22 +837,21 @@ var ResizeObserverController = function () {
    *      dimensions of it's elements.
    */
 
-
-  ResizeObserverController.prototype.updateObservers_ = function () {
+  ResizeObserverController.prototype.updateObservers_ = function() {
     // Collect observers that have active observations.
-    var activeObservers = this.observers_.filter(function (observer) {
-      return observer.gatherActive(), observer.hasActive();
-    }); // Deliver notifications in a separate cycle in order to avoid any
+    var activeObservers = this.observers_.filter(function(observer) {
+      return observer.gatherActive(), observer.hasActive()
+    }) // Deliver notifications in a separate cycle in order to avoid any
     // collisions between observers, e.g. when multiple instances of
     // ResizeObserver are tracking the same element and the callback of one
     // of them changes content dimensions of the observed target. Sometimes
     // this may result in notifications being blocked for the rest of observers.
 
-    activeObservers.forEach(function (observer) {
-      return observer.broadcastActive();
-    });
-    return activeObservers.length > 0;
-  };
+    activeObservers.forEach(function(observer) {
+      return observer.broadcastActive()
+    })
+    return activeObservers.length > 0
+  }
   /**
    * Initializes DOM listeners.
    *
@@ -585,35 +859,33 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.connect_ = function () {
+  ResizeObserverController.prototype.connect_ = function() {
     // Do nothing if running in a non-browser environment or if listeners
     // have been already added.
     if (!isBrowser || this.connected_) {
-      return;
+      return
     } // Subscription to the "Transitionend" event is used as a workaround for
     // delayed transitions. This way it's possible to capture at least the
     // final state of an element.
 
-
-    document.addEventListener('transitionend', this.onTransitionEnd_);
-    window.addEventListener('resize', this.refresh);
+    document.addEventListener('transitionend', this.onTransitionEnd_)
+    window.addEventListener('resize', this.refresh)
 
     if (mutationObserverSupported) {
-      this.mutationsObserver_ = new MutationObserver(this.refresh);
+      this.mutationsObserver_ = new MutationObserver(this.refresh)
       this.mutationsObserver_.observe(document, {
         attributes: true,
         childList: true,
         characterData: true,
         subtree: true
-      });
+      })
     } else {
-      document.addEventListener('DOMSubtreeModified', this.refresh);
-      this.mutationEventsAdded_ = true;
+      document.addEventListener('DOMSubtreeModified', this.refresh)
+      this.mutationEventsAdded_ = true
     }
 
-    this.connected_ = true;
-  };
+    this.connected_ = true
+  }
   /**
    * Removes DOM listeners.
    *
@@ -621,29 +893,28 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.disconnect_ = function () {
+  ResizeObserverController.prototype.disconnect_ = function() {
     // Do nothing if running in a non-browser environment or if listeners
     // have been already removed.
     if (!isBrowser || !this.connected_) {
-      return;
+      return
     }
 
-    document.removeEventListener('transitionend', this.onTransitionEnd_);
-    window.removeEventListener('resize', this.refresh);
+    document.removeEventListener('transitionend', this.onTransitionEnd_)
+    window.removeEventListener('resize', this.refresh)
 
     if (this.mutationsObserver_) {
-      this.mutationsObserver_.disconnect();
+      this.mutationsObserver_.disconnect()
     }
 
     if (this.mutationEventsAdded_) {
-      document.removeEventListener('DOMSubtreeModified', this.refresh);
+      document.removeEventListener('DOMSubtreeModified', this.refresh)
     }
 
-    this.mutationsObserver_ = null;
-    this.mutationEventsAdded_ = false;
-    this.connected_ = false;
-  };
+    this.mutationsObserver_ = null
+    this.mutationEventsAdded_ = false
+    this.connected_ = false
+  }
   /**
    * "Transitionend" event handler.
    *
@@ -652,43 +923,40 @@ var ResizeObserverController = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverController.prototype.onTransitionEnd_ = function (_a) {
+  ResizeObserverController.prototype.onTransitionEnd_ = function(_a) {
     var _b = _a.propertyName,
-        propertyName = _b === void 0 ? '' : _b; // Detect whether transition may affect dimensions of an element.
+      propertyName = _b === void 0 ? '' : _b // Detect whether transition may affect dimensions of an element.
 
-    var isReflowProperty = transitionKeys.some(function (key) {
-      return !!~propertyName.indexOf(key);
-    });
+    var isReflowProperty = transitionKeys.some(function(key) {
+      return !!~propertyName.indexOf(key)
+    })
 
     if (isReflowProperty) {
-      this.refresh();
+      this.refresh()
     }
-  };
+  }
   /**
    * Returns instance of the ResizeObserverController.
    *
    * @returns {ResizeObserverController}
    */
 
-
-  ResizeObserverController.getInstance = function () {
+  ResizeObserverController.getInstance = function() {
     if (!this.instance_) {
-      this.instance_ = new ResizeObserverController();
+      this.instance_ = new ResizeObserverController()
     }
 
-    return this.instance_;
-  };
+    return this.instance_
+  }
   /**
    * Holds reference to the controller's instance.
    *
    * @private {ResizeObserverController}
    */
 
-
-  ResizeObserverController.instance_ = null;
-  return ResizeObserverController;
-}();
+  ResizeObserverController.instance_ = null
+  return ResizeObserverController
+})()
 /**
  * Defines non-writable/enumerable properties of the provided target object.
  *
@@ -697,20 +965,19 @@ var ResizeObserverController = function () {
  * @returns {Object} Target object.
  */
 
-
-var defineConfigurable = function (target, props) {
+var defineConfigurable = function(target, props) {
   for (var _i = 0, _a = Object.keys(props); _i < _a.length; _i++) {
-    var key = _a[_i];
+    var key = _a[_i]
     Object.defineProperty(target, key, {
       value: props[key],
       enumerable: false,
       writable: false,
       configurable: true
-    });
+    })
   }
 
-  return target;
-};
+  return target
+}
 /**
  * Returns the global object associated with provided element.
  *
@@ -718,19 +985,18 @@ var defineConfigurable = function (target, props) {
  * @returns {Object}
  */
 
-
-var getWindowOf = function (target) {
+var getWindowOf = function(target) {
   // Assume that the element is an instance of Node, which means that it
   // has the "ownerDocument" property from which we can retrieve a
   // corresponding global object.
-  var ownerGlobal = target && target.ownerDocument && target.ownerDocument.defaultView; // Return the local global object if it's not possible extract one from
+  var ownerGlobal =
+    target && target.ownerDocument && target.ownerDocument.defaultView // Return the local global object if it's not possible extract one from
   // provided element.
 
-  return ownerGlobal || global$1;
-}; // Placeholder of an empty content rectangle.
+  return ownerGlobal || global$1
+} // Placeholder of an empty content rectangle.
 
-
-var emptyRect = createRectInit(0, 0, 0, 0);
+var emptyRect = createRectInit(0, 0, 0, 0)
 /**
  * Converts provided string to a number.
  *
@@ -739,7 +1005,7 @@ var emptyRect = createRectInit(0, 0, 0, 0);
  */
 
 function toFloat(value) {
-  return parseFloat(value) || 0;
+  return parseFloat(value) || 0
 }
 /**
  * Extracts borders size from provided styles.
@@ -749,18 +1015,17 @@ function toFloat(value) {
  * @returns {number}
  */
 
-
 function getBordersSize(styles) {
-  var positions = [];
+  var positions = []
 
   for (var _i = 1; _i < arguments.length; _i++) {
-    positions[_i - 1] = arguments[_i];
+    positions[_i - 1] = arguments[_i]
   }
 
-  return positions.reduce(function (size, position) {
-    var value = styles['border-' + position + '-width'];
-    return size + toFloat(value);
-  }, 0);
+  return positions.reduce(function(size, position) {
+    var value = styles['border-' + position + '-width']
+    return size + toFloat(value)
+  }, 0)
 }
 /**
  * Extracts paddings sizes from provided styles.
@@ -769,18 +1034,17 @@ function getBordersSize(styles) {
  * @returns {Object} Paddings box.
  */
 
-
 function getPaddings(styles) {
-  var positions = ['top', 'right', 'bottom', 'left'];
-  var paddings = {};
+  var positions = ['top', 'right', 'bottom', 'left']
+  var paddings = {}
 
   for (var _i = 0, positions_1 = positions; _i < positions_1.length; _i++) {
-    var position = positions_1[_i];
-    var value = styles['padding-' + position];
-    paddings[position] = toFloat(value);
+    var position = positions_1[_i]
+    var value = styles['padding-' + position]
+    paddings[position] = toFloat(value)
   }
 
-  return paddings;
+  return paddings
 }
 /**
  * Calculates content rectangle of provided SVG element.
@@ -790,10 +1054,9 @@ function getPaddings(styles) {
  * @returns {DOMRectInit}
  */
 
-
 function getSVGContentRect(target) {
-  var bbox = target.getBBox();
-  return createRectInit(0, 0, bbox.width, bbox.height);
+  var bbox = target.getBBox()
+  return createRectInit(0, 0, bbox.width, bbox.height)
 }
 /**
  * Calculates content rectangle of provided HTMLElement.
@@ -802,12 +1065,11 @@ function getSVGContentRect(target) {
  * @returns {DOMRectInit}
  */
 
-
 function getHTMLElementContentRect(target) {
   // Client width & height properties can't be
   // used exclusively as they provide rounded values.
   var clientWidth = target.clientWidth,
-      clientHeight = target.clientHeight; // By this condition we can catch all non-replaced inline, hidden and
+    clientHeight = target.clientHeight // By this condition we can catch all non-replaced inline, hidden and
   // detached elements. Though elements with width & height properties less
   // than 0.5 will be discarded as well.
   //
@@ -817,19 +1079,19 @@ function getHTMLElementContentRect(target) {
   // gives wrong results for elements with width & height less than 0.5.
 
   if (!clientWidth && !clientHeight) {
-    return emptyRect;
+    return emptyRect
   }
 
-  var styles = getWindowOf(target).getComputedStyle(target);
-  var paddings = getPaddings(styles);
-  var horizPad = paddings.left + paddings.right;
-  var vertPad = paddings.top + paddings.bottom; // Computed styles of width & height are being used because they are the
+  var styles = getWindowOf(target).getComputedStyle(target)
+  var paddings = getPaddings(styles)
+  var horizPad = paddings.left + paddings.right
+  var vertPad = paddings.top + paddings.bottom // Computed styles of width & height are being used because they are the
   // only dimensions available to JS that contain non-rounded values. It could
   // be possible to utilize the getBoundingClientRect if only it's data wasn't
   // affected by CSS transformations let alone paddings, borders and scroll bars.
 
   var width = toFloat(styles.width),
-      height = toFloat(styles.height); // Width & height include paddings and borders when the 'border-box' box
+    height = toFloat(styles.height) // Width & height include paddings and borders when the 'border-box' box
   // model is applied (except for IE).
 
   if (styles.boxSizing === 'border-box') {
@@ -840,40 +1102,39 @@ function getHTMLElementContentRect(target) {
     // properties then it's either IE, and thus we don't need to subtract
     // anything, or an element merely doesn't have paddings/borders styles.
     if (Math.round(width + horizPad) !== clientWidth) {
-      width -= getBordersSize(styles, 'left', 'right') + horizPad;
+      width -= getBordersSize(styles, 'left', 'right') + horizPad
     }
 
     if (Math.round(height + vertPad) !== clientHeight) {
-      height -= getBordersSize(styles, 'top', 'bottom') + vertPad;
+      height -= getBordersSize(styles, 'top', 'bottom') + vertPad
     }
   } // Following steps can't be applied to the document's root element as its
   // client[Width/Height] properties represent viewport area of the window.
   // Besides, it's as well not necessary as the <html> itself neither has
   // rendered scroll bars nor it can be clipped.
 
-
   if (!isDocumentElement(target)) {
     // In some browsers (only in Firefox, actually) CSS width & height
     // include scroll bars size which can be removed at this step as scroll
     // bars are the only difference between rounded dimensions + paddings
     // and "client" properties, though that is not always true in Chrome.
-    var vertScrollbar = Math.round(width + horizPad) - clientWidth;
-    var horizScrollbar = Math.round(height + vertPad) - clientHeight; // Chrome has a rather weird rounding of "client" properties.
+    var vertScrollbar = Math.round(width + horizPad) - clientWidth
+    var horizScrollbar = Math.round(height + vertPad) - clientHeight // Chrome has a rather weird rounding of "client" properties.
     // E.g. for an element with content width of 314.2px it sometimes gives
     // the client width of 315px and for the width of 314.7px it may give
     // 314px. And it doesn't happen all the time. So just ignore this delta
     // as a non-relevant.
 
     if (Math.abs(vertScrollbar) !== 1) {
-      width -= vertScrollbar;
+      width -= vertScrollbar
     }
 
     if (Math.abs(horizScrollbar) !== 1) {
-      height -= horizScrollbar;
+      height -= horizScrollbar
     }
   }
 
-  return createRectInit(paddings.left, paddings.top, width, height);
+  return createRectInit(paddings.left, paddings.top, width, height)
 }
 /**
  * Checks whether provided element is an instance of the SVGGraphicsElement.
@@ -882,23 +1143,24 @@ function getHTMLElementContentRect(target) {
  * @returns {boolean}
  */
 
-
-var isSVGGraphicsElement = function () {
+var isSVGGraphicsElement = (function() {
   // Some browsers, namely IE and Edge, don't have the SVGGraphicsElement
   // interface.
   if (typeof SVGGraphicsElement !== 'undefined') {
-    return function (target) {
-      return target instanceof getWindowOf(target).SVGGraphicsElement;
-    };
+    return function(target) {
+      return target instanceof getWindowOf(target).SVGGraphicsElement
+    }
   } // If it's so, then check that element is at least an instance of the
   // SVGElement and that it has the "getBBox" method.
   // eslint-disable-next-line no-extra-parens
 
-
-  return function (target) {
-    return target instanceof getWindowOf(target).SVGElement && typeof target.getBBox === 'function';
-  };
-}();
+  return function(target) {
+    return (
+      target instanceof getWindowOf(target).SVGElement &&
+      typeof target.getBBox === 'function'
+    )
+  }
+})()
 /**
  * Checks whether provided element is a document element (<html>).
  *
@@ -906,9 +1168,8 @@ var isSVGGraphicsElement = function () {
  * @returns {boolean}
  */
 
-
 function isDocumentElement(target) {
-  return target === getWindowOf(target).document.documentElement;
+  return target === getWindowOf(target).document.documentElement
 }
 /**
  * Calculates an appropriate content rectangle for provided html or svg element.
@@ -917,17 +1178,16 @@ function isDocumentElement(target) {
  * @returns {DOMRectInit}
  */
 
-
 function getContentRect(target) {
   if (!isBrowser) {
-    return emptyRect;
+    return emptyRect
   }
 
   if (isSVGGraphicsElement(target)) {
-    return getSVGContentRect(target);
+    return getSVGContentRect(target)
   }
 
-  return getHTMLElementContentRect(target);
+  return getHTMLElementContentRect(target)
 }
 /**
  * Creates rectangle with an interface of the DOMRectReadOnly.
@@ -937,15 +1197,14 @@ function getContentRect(target) {
  * @returns {DOMRectReadOnly}
  */
 
-
 function createReadOnlyRect(_a) {
   var x = _a.x,
-      y = _a.y,
-      width = _a.width,
-      height = _a.height; // If DOMRectReadOnly is available use it as a prototype for the rectangle.
+    y = _a.y,
+    width = _a.width,
+    height = _a.height // If DOMRectReadOnly is available use it as a prototype for the rectangle.
 
-  var Constr = typeof DOMRectReadOnly !== 'undefined' ? DOMRectReadOnly : Object;
-  var rect = Object.create(Constr.prototype); // Rectangle's properties are not writable and non-enumerable.
+  var Constr = typeof DOMRectReadOnly !== 'undefined' ? DOMRectReadOnly : Object
+  var rect = Object.create(Constr.prototype) // Rectangle's properties are not writable and non-enumerable.
 
   defineConfigurable(rect, {
     x: x,
@@ -956,8 +1215,8 @@ function createReadOnlyRect(_a) {
     right: x + width,
     bottom: height + y,
     left: x
-  });
-  return rect;
+  })
+  return rect
 }
 /**
  * Creates DOMRectInit object based on the provided dimensions and the x/y coordinates.
@@ -970,22 +1229,20 @@ function createReadOnlyRect(_a) {
  * @returns {DOMRectInit}
  */
 
-
 function createRectInit(x, y, width, height) {
   return {
     x: x,
     y: y,
     width: width,
     height: height
-  };
+  }
 }
 /**
  * Class that is responsible for computations of the content rectangle of
  * provided DOM element and for keeping track of it's changes.
  */
 
-
-var ResizeObservation = function () {
+var ResizeObservation = (function() {
   /**
    * Creates an instance of ResizeObservation.
    *
@@ -997,22 +1254,22 @@ var ResizeObservation = function () {
      *
      * @type {number}
      */
-    this.broadcastWidth = 0;
+    this.broadcastWidth = 0
     /**
      * Broadcasted height of content rectangle.
      *
      * @type {number}
      */
 
-    this.broadcastHeight = 0;
+    this.broadcastHeight = 0
     /**
      * Reference to the last observed content rectangle.
      *
      * @private {DOMRectInit}
      */
 
-    this.contentRect_ = createRectInit(0, 0, 0, 0);
-    this.target = target;
+    this.contentRect_ = createRectInit(0, 0, 0, 0)
+    this.target = target
   }
   /**
    * Updates content rectangle and tells whether it's width or height properties
@@ -1021,12 +1278,13 @@ var ResizeObservation = function () {
    * @returns {boolean}
    */
 
-
-  ResizeObservation.prototype.isActive = function () {
-    var rect = getContentRect(this.target);
-    this.contentRect_ = rect;
-    return rect.width !== this.broadcastWidth || rect.height !== this.broadcastHeight;
-  };
+  ResizeObservation.prototype.isActive = function() {
+    var rect = getContentRect(this.target)
+    this.contentRect_ = rect
+    return (
+      rect.width !== this.broadcastWidth || rect.height !== this.broadcastHeight
+    )
+  }
   /**
    * Updates 'broadcastWidth' and 'broadcastHeight' properties with a data
    * from the corresponding properties of the last observed content rectangle.
@@ -1034,18 +1292,17 @@ var ResizeObservation = function () {
    * @returns {DOMRectInit} Last observed content rectangle.
    */
 
+  ResizeObservation.prototype.broadcastRect = function() {
+    var rect = this.contentRect_
+    this.broadcastWidth = rect.width
+    this.broadcastHeight = rect.height
+    return rect
+  }
 
-  ResizeObservation.prototype.broadcastRect = function () {
-    var rect = this.contentRect_;
-    this.broadcastWidth = rect.width;
-    this.broadcastHeight = rect.height;
-    return rect;
-  };
+  return ResizeObservation
+})()
 
-  return ResizeObservation;
-}();
-
-var ResizeObserverEntry = function () {
+var ResizeObserverEntry = (function() {
   /**
    * Creates an instance of ResizeObserverEntry.
    *
@@ -1053,7 +1310,7 @@ var ResizeObserverEntry = function () {
    * @param {DOMRectInit} rectInit - Data of the element's content rectangle.
    */
   function ResizeObserverEntry(target, rectInit) {
-    var contentRect = createReadOnlyRect(rectInit); // According to the specification following properties are not writable
+    var contentRect = createReadOnlyRect(rectInit) // According to the specification following properties are not writable
     // and are also not enumerable in the native implementation.
     //
     // Property accessors are not being used as they'd require to define a
@@ -1063,13 +1320,13 @@ var ResizeObserverEntry = function () {
     defineConfigurable(this, {
       target: target,
       contentRect: contentRect
-    });
+    })
   }
 
-  return ResizeObserverEntry;
-}();
+  return ResizeObserverEntry
+})()
 
-var ResizeObserverSPI = function () {
+var ResizeObserverSPI = (function() {
   /**
    * Creates a new instance of ResizeObserver.
    *
@@ -1087,22 +1344,24 @@ var ResizeObserverSPI = function () {
      *
      * @private {Array<ResizeObservation>}
      */
-    this.activeObservations_ = [];
+    this.activeObservations_ = []
     /**
      * Registry of the ResizeObservation instances.
      *
      * @private {Map<Element, ResizeObservation>}
      */
 
-    this.observations_ = new MapShim();
+    this.observations_ = new MapShim()
 
     if (typeof callback !== 'function') {
-      throw new TypeError('The callback provided as parameter 1 is not a function.');
+      throw new TypeError(
+        'The callback provided as parameter 1 is not a function.'
+      )
     }
 
-    this.callback_ = callback;
-    this.controller_ = controller;
-    this.callbackCtx_ = callbackCtx;
+    this.callback_ = callback
+    this.controller_ = controller
+    this.callbackCtx_ = callbackCtx
   }
   /**
    * Starts observing provided element.
@@ -1111,32 +1370,30 @@ var ResizeObserverSPI = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverSPI.prototype.observe = function (target) {
+  ResizeObserverSPI.prototype.observe = function(target) {
     if (!arguments.length) {
-      throw new TypeError('1 argument required, but only 0 present.');
+      throw new TypeError('1 argument required, but only 0 present.')
     } // Do nothing if current environment doesn't have the Element interface.
 
-
     if (typeof Element === 'undefined' || !(Element instanceof Object)) {
-      return;
+      return
     }
 
     if (!(target instanceof getWindowOf(target).Element)) {
-      throw new TypeError('parameter 1 is not of type "Element".');
+      throw new TypeError('parameter 1 is not of type "Element".')
     }
 
-    var observations = this.observations_; // Do nothing if element is already being observed.
+    var observations = this.observations_ // Do nothing if element is already being observed.
 
     if (observations.has(target)) {
-      return;
+      return
     }
 
-    observations.set(target, new ResizeObservation(target));
-    this.controller_.addObserver(this); // Force the update of observations.
+    observations.set(target, new ResizeObservation(target))
+    this.controller_.addObserver(this) // Force the update of observations.
 
-    this.controller_.refresh();
-  };
+    this.controller_.refresh()
+  }
   /**
    * Stops observing provided element.
    *
@@ -1144,45 +1401,42 @@ var ResizeObserverSPI = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverSPI.prototype.unobserve = function (target) {
+  ResizeObserverSPI.prototype.unobserve = function(target) {
     if (!arguments.length) {
-      throw new TypeError('1 argument required, but only 0 present.');
+      throw new TypeError('1 argument required, but only 0 present.')
     } // Do nothing if current environment doesn't have the Element interface.
 
-
     if (typeof Element === 'undefined' || !(Element instanceof Object)) {
-      return;
+      return
     }
 
     if (!(target instanceof getWindowOf(target).Element)) {
-      throw new TypeError('parameter 1 is not of type "Element".');
+      throw new TypeError('parameter 1 is not of type "Element".')
     }
 
-    var observations = this.observations_; // Do nothing if element is not being observed.
+    var observations = this.observations_ // Do nothing if element is not being observed.
 
     if (!observations.has(target)) {
-      return;
+      return
     }
 
-    observations.delete(target);
+    observations.delete(target)
 
     if (!observations.size) {
-      this.controller_.removeObserver(this);
+      this.controller_.removeObserver(this)
     }
-  };
+  }
   /**
    * Stops observing all elements.
    *
    * @returns {void}
    */
 
-
-  ResizeObserverSPI.prototype.disconnect = function () {
-    this.clearActive();
-    this.observations_.clear();
-    this.controller_.removeObserver(this);
-  };
+  ResizeObserverSPI.prototype.disconnect = function() {
+    this.clearActive()
+    this.observations_.clear()
+    this.controller_.removeObserver(this)
+  }
   /**
    * Collects observation instances the associated element of which has changed
    * it's content rectangle.
@@ -1190,17 +1444,16 @@ var ResizeObserverSPI = function () {
    * @returns {void}
    */
 
+  ResizeObserverSPI.prototype.gatherActive = function() {
+    var _this = this
 
-  ResizeObserverSPI.prototype.gatherActive = function () {
-    var _this = this;
-
-    this.clearActive();
-    this.observations_.forEach(function (observation) {
+    this.clearActive()
+    this.observations_.forEach(function(observation) {
       if (observation.isActive()) {
-        _this.activeObservations_.push(observation);
+        _this.activeObservations_.push(observation)
       }
-    });
-  };
+    })
+  }
   /**
    * Invokes initial callback function with a list of ResizeObserverEntry
    * instances collected from active resize observations.
@@ -1208,55 +1461,54 @@ var ResizeObserverSPI = function () {
    * @returns {void}
    */
 
-
-  ResizeObserverSPI.prototype.broadcastActive = function () {
+  ResizeObserverSPI.prototype.broadcastActive = function() {
     // Do nothing if observer doesn't have active observations.
     if (!this.hasActive()) {
-      return;
+      return
     }
 
-    var ctx = this.callbackCtx_; // Create ResizeObserverEntry instance for every active observation.
+    var ctx = this.callbackCtx_ // Create ResizeObserverEntry instance for every active observation.
 
-    var entries = this.activeObservations_.map(function (observation) {
-      return new ResizeObserverEntry(observation.target, observation.broadcastRect());
-    });
-    this.callback_.call(ctx, entries, ctx);
-    this.clearActive();
-  };
+    var entries = this.activeObservations_.map(function(observation) {
+      return new ResizeObserverEntry(
+        observation.target,
+        observation.broadcastRect()
+      )
+    })
+    this.callback_.call(ctx, entries, ctx)
+    this.clearActive()
+  }
   /**
    * Clears the collection of active observations.
    *
    * @returns {void}
    */
 
-
-  ResizeObserverSPI.prototype.clearActive = function () {
-    this.activeObservations_.splice(0);
-  };
+  ResizeObserverSPI.prototype.clearActive = function() {
+    this.activeObservations_.splice(0)
+  }
   /**
    * Tells whether observer has active observations.
    *
    * @returns {boolean}
    */
 
+  ResizeObserverSPI.prototype.hasActive = function() {
+    return this.activeObservations_.length > 0
+  }
 
-  ResizeObserverSPI.prototype.hasActive = function () {
-    return this.activeObservations_.length > 0;
-  };
-
-  return ResizeObserverSPI;
-}(); // Registry of internal observers. If WeakMap is not available use current shim
+  return ResizeObserverSPI
+})() // Registry of internal observers. If WeakMap is not available use current shim
 // for the Map collection as it has all required methods and because WeakMap
 // can't be fully polyfilled anyway.
 
-
-var observers = typeof WeakMap !== 'undefined' ? new WeakMap() : new MapShim();
+var observers = typeof WeakMap !== 'undefined' ? new WeakMap() : new MapShim()
 /**
  * ResizeObserver API. Encapsulates the ResizeObserver SPI implementation
  * exposing only those methods and properties that are defined in the spec.
  */
 
-var ResizeObserver = function () {
+var ResizeObserver = (function() {
   /**
    * Creates a new instance of ResizeObserver.
    *
@@ -1265,157 +1517,155 @@ var ResizeObserver = function () {
    */
   function ResizeObserver(callback) {
     if (!(this instanceof ResizeObserver)) {
-      throw new TypeError('Cannot call a class as a function.');
+      throw new TypeError('Cannot call a class as a function.')
     }
 
     if (!arguments.length) {
-      throw new TypeError('1 argument required, but only 0 present.');
+      throw new TypeError('1 argument required, but only 0 present.')
     }
 
-    var controller = ResizeObserverController.getInstance();
-    var observer = new ResizeObserverSPI(callback, controller, this);
-    observers.set(this, observer);
+    var controller = ResizeObserverController.getInstance()
+    var observer = new ResizeObserverSPI(callback, controller, this)
+    observers.set(this, observer)
   }
 
-  return ResizeObserver;
-}(); // Expose public methods of ResizeObserver.
+  return ResizeObserver
+})() // Expose public methods of ResizeObserver.
 
+;['observe', 'unobserve', 'disconnect'].forEach(function(method) {
+  ResizeObserver.prototype[method] = function() {
+    var _a
 
-['observe', 'unobserve', 'disconnect'].forEach(function (method) {
-  ResizeObserver.prototype[method] = function () {
-    var _a;
+    return (_a = observers.get(this))[method].apply(_a, arguments)
+  }
+})
 
-    return (_a = observers.get(this))[method].apply(_a, arguments);
-  };
-});
-
-var index = function () {
+var index = (function() {
   // Export existing implementation if available.
   if (typeof global$1.ResizeObserver !== 'undefined') {
-    return global$1.ResizeObserver;
+    return global$1.ResizeObserver
   }
 
-  return ResizeObserver;
-}();
+  return ResizeObserver
+})()
 
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === 'undefined'
 /* istanbul ignore next */
 
-const resizeHandler = function (entries) {
+const resizeHandler = function(entries) {
   for (const entry of entries) {
-    const listeners = entry.target.__resizeListeners__ || [];
+    const listeners = entry.target.__resizeListeners__ || []
 
     if (listeners.length) {
       listeners.forEach(fn => {
-        fn();
-      });
+        fn()
+      })
     }
   }
-};
+}
 /* istanbul ignore next */
 
-const addResizeListener = function (element, fn) {
-  if (isServer) return;
+const addResizeListener = function(element, fn) {
+  if (isServer) return
 
   if (!element.__resizeListeners__) {
-    element.__resizeListeners__ = [];
-    element.__ro__ = new index(resizeHandler);
+    element.__resizeListeners__ = []
+    element.__ro__ = new index(resizeHandler)
 
-    element.__ro__.observe(element);
+    element.__ro__.observe(element)
   }
 
-  element.__resizeListeners__.push(fn);
-};
+  element.__resizeListeners__.push(fn)
+}
 /* istanbul ignore next */
 
-const removeResizeListener = function (element, fn) {
-  if (!element || !element.__resizeListeners__) return;
+const removeResizeListener = function(element, fn) {
+  if (!element || !element.__resizeListeners__) return
 
-  element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1);
+  element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1)
 
   if (!element.__resizeListeners__.length) {
-    element.__ro__.disconnect();
+    element.__ro__.disconnect()
   }
-};
+}
 
-let scrollBarWidth;
-function scrollbarWidth () {
+let scrollBarWidth
+function scrollbarWidth() {
   // if (Vue.prototype.$isServer) return 0
-  if (scrollBarWidth !== undefined) return scrollBarWidth;
-  const outer = document.createElement('div');
-  outer.className = 'el-scrollbar__wrap';
-  outer.style.visibility = 'hidden';
-  outer.style.width = '100px';
-  outer.style.position = 'absolute';
-  outer.style.top = '-9999px';
-  document.body.appendChild(outer);
-  const widthNoScroll = outer.offsetWidth;
-  outer.style.overflow = 'scroll';
-  const inner = document.createElement('div');
-  inner.style.width = '100%';
-  outer.appendChild(inner);
-  const widthWithScroll = inner.offsetWidth;
-  outer.parentNode.removeChild(outer);
-  scrollBarWidth = widthNoScroll - widthWithScroll;
-  return scrollBarWidth;
+  if (scrollBarWidth !== undefined) return scrollBarWidth
+  const outer = document.createElement('div')
+  outer.className = 'el-scrollbar__wrap'
+  outer.style.visibility = 'hidden'
+  outer.style.width = '100px'
+  outer.style.position = 'absolute'
+  outer.style.top = '-9999px'
+  document.body.appendChild(outer)
+  const widthNoScroll = outer.offsetWidth
+  outer.style.overflow = 'scroll'
+  const inner = document.createElement('div')
+  inner.style.width = '100%'
+  outer.appendChild(inner)
+  const widthWithScroll = inner.offsetWidth
+  outer.parentNode.removeChild(outer)
+  scrollBarWidth = widthNoScroll - widthWithScroll
+  return scrollBarWidth
 }
 
 function extend(to, _from) {
   for (const key in _from) {
-    to[key] = _from[key];
+    to[key] = _from[key]
   }
 
-  return to;
+  return to
 }
 
 function toObject(arr) {
-  var res = {};
+  var res = {}
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
-      extend(res, arr[i]);
+      extend(res, arr[i])
     }
   }
 
-  return res;
+  return res
 }
 
 /* istanbul ignore next */
 /* istanbul ignore next */
 
-
-const on = function () {
+const on = (function() {
   if (document.addEventListener) {
-    return function (element, event, handler) {
+    return function(element, event, handler) {
       if (element && event && handler) {
-        element.addEventListener(event, handler, false);
+        element.addEventListener(event, handler, false)
       }
-    };
+    }
   } else {
-    return function (element, event, handler) {
+    return function(element, event, handler) {
       if (element && event && handler) {
-        element.attachEvent('on' + event, handler);
+        element.attachEvent('on' + event, handler)
       }
-    };
+    }
   }
-}();
+})()
 /* istanbul ignore next */
 
-const off = function () {
+const off = (function() {
   if (document.removeEventListener) {
-    return function (element, event, handler) {
+    return function(element, event, handler) {
       if (element && event) {
-        element.removeEventListener(event, handler, false);
+        element.removeEventListener(event, handler, false)
       }
-    };
+    }
   } else {
-    return function (element, event, handler) {
+    return function(element, event, handler) {
       if (element && event) {
-        element.detachEvent('on' + event, handler);
+        element.detachEvent('on' + event, handler)
       }
-    };
+    }
   }
-}();
+})()
 
 const BAR_MAP = {
   vertical: {
@@ -1438,86 +1688,87 @@ const BAR_MAP = {
     client: 'clientX',
     direction: 'left'
   }
-};
-function renderThumbStyle({
-  move,
-  size,
-  bar
-}) {
-  const style = {};
-  const translate = `translate${bar.value.axis}(${move.value}%)`;
-  style[bar.value.size] = size.value;
-  style.transform = translate;
-  style.msTransform = translate;
-  style.webkitTransform = translate;
-  return style;
+}
+function renderThumbStyle({ move, size, bar }) {
+  const style = {}
+  const translate = `translate${bar.value.axis}(${move.value}%)`
+  style[bar.value.size] = size.value
+  style.transform = translate
+  style.msTransform = translate
+  style.webkitTransform = translate
+  return style
 }
 
-const useDrag = ({
-  bar,
-  state,
-  thumb,
-  cursorDown
-}) => {
-  const instance = getCurrentInstance();
-  const {
-    proxy
-  } = instance;
-  const wrap = computed(() => instance.parent.proxy.wrap);
+const useDrag = ({ bar, state, thumb, cursorDown }) => {
+  const instance = getCurrentInstance()
+  const { proxy } = instance
+  const wrap = computed(() => instance.parent.proxy.wrap)
 
   const startDrag = e => {
-    e.stopImmediatePropagation();
-    cursorDown.value = true;
-    on(document, 'mousemove', mouseMoveDocumentHandler);
-    on(document, 'mouseup', mouseUpDocumentHandler);
+    e.stopImmediatePropagation()
+    cursorDown.value = true
+    on(document, 'mousemove', mouseMoveDocumentHandler)
+    on(document, 'mouseup', mouseUpDocumentHandler)
 
-    document.onselectstart = () => false;
-  };
+    document.onselectstart = () => false
+  }
 
   const mouseMoveDocumentHandler = e => {
-    if (cursorDown.value === false) return;
-    const prevPage = state[bar.value.axis];
-    if (!prevPage) return;
-    const offset = (proxy.$el.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]) * -1;
-    const thumbClickPosition = thumb.value[bar.value.offset] - prevPage;
-    const thumbPositionPercentage = (offset - thumbClickPosition) * 100 / proxy.$el[bar.value.offset];
-    wrap.value[bar.value.scroll] = thumbPositionPercentage * wrap.value[bar.value.scrollSize] / 100;
-  };
+    if (cursorDown.value === false) return
+    const prevPage = state[bar.value.axis]
+    if (!prevPage) return
+    const offset =
+      (proxy.$el.getBoundingClientRect()[bar.value.direction] -
+        e[bar.value.client]) *
+      -1
+    const thumbClickPosition = thumb.value[bar.value.offset] - prevPage
+    const thumbPositionPercentage =
+      ((offset - thumbClickPosition) * 100) / proxy.$el[bar.value.offset]
+    wrap.value[bar.value.scroll] =
+      (thumbPositionPercentage * wrap.value[bar.value.scrollSize]) / 100
+  }
 
   const mouseUpDocumentHandler = () => {
-    cursorDown.value = false;
-    state[bar.value.axis] = 0;
-    off(document, 'mousemove', mouseMoveDocumentHandler);
-    document.onselectstart = null;
-  };
+    cursorDown.value = false
+    state[bar.value.axis] = 0
+    off(document, 'mousemove', mouseMoveDocumentHandler)
+    document.onselectstart = null
+  }
 
   const clickThumbHandler = e => {
     // prevent click event of right button
     if (e.ctrlKey || e.button === 2) {
-      return;
+      return
     }
 
-    startDrag(e);
-    state[bar.value.axis] = e.currentTarget[bar.value.offset] - (e[bar.value.client] - e.currentTarget.getBoundingClientRect()[bar.value.direction]);
-  };
+    startDrag(e)
+    state[bar.value.axis] =
+      e.currentTarget[bar.value.offset] -
+      (e[bar.value.client] -
+        e.currentTarget.getBoundingClientRect()[bar.value.direction])
+  }
 
   const clickTrackHandler = e => {
-    const offset = Math.abs(e.target.getBoundingClientRect()[bar.value.direction] - e[bar.value.client]);
-    const thumbHalf = thumb.value[bar.value.offset] / 2;
-    const thumbPositionPercentage = (offset - thumbHalf) * 100 / proxy.$el[bar.value.offset];
-    wrap.value[bar.value.scroll] = thumbPositionPercentage * wrap.value[bar.value.scrollSize] / 100;
-  };
+    const offset = Math.abs(
+      e.target.getBoundingClientRect()[bar.value.direction] -
+        e[bar.value.client]
+    )
+    const thumbHalf = thumb.value[bar.value.offset] / 2
+    const thumbPositionPercentage =
+      ((offset - thumbHalf) * 100) / proxy.$el[bar.value.offset]
+    wrap.value[bar.value.scroll] =
+      (thumbPositionPercentage * wrap.value[bar.value.scrollSize]) / 100
+  }
 
   onUnmounted(() => {
-    off(document, 'mouseup', mouseUpDocumentHandler);
-  });
+    off(document, 'mouseup', mouseUpDocumentHandler)
+  })
   return {
     clickThumbHandler,
     clickTrackHandler
-  };
-};
+  }
+}
 /* istanbul ignore next */
-
 
 var Bar = {
   name: 'Bar',
@@ -1528,43 +1779,51 @@ var Bar = {
   },
 
   setup(props) {
-    const {
-      size,
-      move,
-      vertical
-    } = toRefs(props);
-    const bar = computed(() => BAR_MAP[vertical.value ? 'vertical' : 'horizontal']);
-    const state = reactive({});
-    const cursorDown = ref(false);
-    const thumb = ref(null);
-    const {
-      clickThumbHandler,
-      clickTrackHandler
-    } = useDrag({
+    const { size, move, vertical } = toRefs(props)
+    const bar = computed(
+      () => BAR_MAP[vertical.value ? 'vertical' : 'horizontal']
+    )
+    const state = reactive({})
+    const cursorDown = ref(false)
+    const thumb = ref(null)
+    const { clickThumbHandler, clickTrackHandler } = useDrag({
       bar,
       state,
       thumb,
       cursorDown
-    });
-    return () => createVNode("div", {
-      "class": ['el-scrollbar__bar', 'is-' + bar.value.key],
-      "onMouseDown": clickTrackHandler
-    }, [createVNode("div", {
-      "ref": thumb,
-      "className": "el-scrollbar__thumb",
-      "onMouseDown": clickThumbHandler,
-      "style": renderThumbStyle({
-        size,
-        move,
-        bar
-      })
-    }, null)]);
+    })
+    return () =>
+      createVNode(
+        'div',
+        {
+          class: ['el-scrollbar__bar', 'is-' + bar.value.key],
+          onMouseDown: clickTrackHandler
+        },
+        [
+          createVNode(
+            'div',
+            {
+              ref: thumb,
+              className: 'el-scrollbar__thumb',
+              onMouseDown: clickThumbHandler,
+              style: renderThumbStyle({
+                size,
+                move,
+                bar
+              })
+            },
+            null
+          )
+        ]
+      )
   }
-
-};
+}
 
 function _isSlot(s) {
-  return typeof s === 'function' || Object.prototype.toString.call(s) === '[object Object]' && !isVNode(s);
+  return (
+    typeof s === 'function' ||
+    (Object.prototype.toString.call(s) === '[object Object]' && !isVNode(s))
+  )
 }
 
 const useScroll = (wrap, native, resize, noresize) => {
@@ -1573,38 +1832,39 @@ const useScroll = (wrap, native, resize, noresize) => {
     sizeHeight: '0',
     moveX: 0,
     moveY: 0
-  });
+  })
 
   const handleScroll = () => {
-    data.moveY = wrap.value.scrollTop * 100 / wrap.value.clientHeight;
-    data.moveX = wrap.value.scrollLeft * 100 / wrap.value.clientWidth;
-  };
+    data.moveY = (wrap.value.scrollTop * 100) / wrap.value.clientHeight
+    data.moveX = (wrap.value.scrollLeft * 100) / wrap.value.clientWidth
+  }
 
   const update = () => {
-    if (!(wrap !== null && wrap !== void 0 && wrap.value)) return;
-    const heightPercentage = wrap.value.clientHeight * 100 / wrap.value.scrollHeight;
-    const widthPercentage = wrap.value.clientWidth * 100 / wrap.value.scrollWidth;
-    data.sizeHeight = heightPercentage < 100 ? heightPercentage + '%' : '';
-    data.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : '';
-  };
+    if (!(wrap !== null && wrap !== void 0 && wrap.value)) return
+    const heightPercentage =
+      (wrap.value.clientHeight * 100) / wrap.value.scrollHeight
+    const widthPercentage =
+      (wrap.value.clientWidth * 100) / wrap.value.scrollWidth
+    data.sizeHeight = heightPercentage < 100 ? heightPercentage + '%' : ''
+    data.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : ''
+  }
 
   onMounted(() => {
-    if (native.value) return;
-    nextTick(update);
-    !noresize.value && addResizeListener(resize.value, update);
-  });
+    if (native.value) return
+    nextTick(update)
+    !noresize.value && addResizeListener(resize.value, update)
+  })
   onUnmounted(() => {
-    if (native.value) return;
-    !noresize.value && removeResizeListener(resize.value, update);
-  });
+    if (native.value) return
+    !noresize.value && removeResizeListener(resize.value, update)
+  })
   return {
     data,
     update,
     handleScroll
-  };
-};
+  }
+}
 /* istanbul ignore next */
-
 
 var ElScrollbar = {
   name: 'ElScrollbar',
@@ -1626,37 +1886,40 @@ var ElScrollbar = {
   },
 
   setup(props) {
-    const wrap = ref(null);
-    const resize = ref(null);
-    const {
-      wrapStyle,
-      tag,
-      native,
-      noresize
-    } = toRefs(props);
-    const gutter = scrollbarWidth();
-    let style = wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value;
-    const ComponentName = tag.value;
+    const wrap = ref(null)
+    const resize = ref(null)
+    const { wrapStyle, tag, native, noresize } = toRefs(props)
+    const gutter = scrollbarWidth()
+    let style =
+      wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value
+    const ComponentName = tag.value
 
     if (gutter) {
-      const gutterWith = `-${gutter}px`;
-      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+      const gutterWith = `-${gutter}px`
+      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`
 
-      if (Array.isArray(wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value)) {
-        style = toObject(wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value);
-        style.marginRight = style.marginBottom = gutterWith;
+      if (
+        Array.isArray(
+          wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value
+        )
+      ) {
+        style = toObject(
+          wrapStyle === null || wrapStyle === void 0 ? void 0 : wrapStyle.value
+        )
+        style.marginRight = style.marginBottom = gutterWith
       } else if (typeof wrapStyle === 'string') {
-        style += gutterStyle;
+        style += gutterStyle
       } else {
-        style = gutterStyle;
+        style = gutterStyle
       }
     }
 
-    const {
-      data,
-      handleScroll,
-      update
-    } = useScroll(wrap, native, resize, noresize);
+    const { data, handleScroll, update } = useScroll(
+      wrap,
+      native,
+      resize,
+      noresize
+    )
     return {
       // state
       data,
@@ -1669,47 +1932,81 @@ var ElScrollbar = {
       // methods
       handleScroll,
       update
-    };
+    }
   },
 
   render() {
-    let _slot;
+    let _slot
 
-    const ComponentName = this.ComponentName;
-    return createVNode("div", {
-      "class": "el-scrollbar"
-    }, [createVNode("div", {
-      "ref": "wrap",
-      "class": [this.wrapClass, 'el-scrollbar__wrap', {
-        'el-scrollbar__wrap--hidden-default': !this.native && !this.gutter
-      }],
-      "onScroll": () => {
-        !this.native && this.handleScroll();
+    const ComponentName = this.ComponentName
+    return createVNode(
+      'div',
+      {
+        class: 'el-scrollbar'
       },
-      "style": this.style
-    }, [createVNode(ComponentName, {
-      "ref": "resize",
-      "class": ['el-scrollbar__view', this.viewClass],
-      "style": this.viewStyle
-    }, _isSlot(_slot = this.$slots.default()) ? _slot : {
-      default: () => [_slot]
-    })]), !this.native.value && [createVNode(Bar, {
-      "move": this.data.moveX,
-      "size": this.data.sizeWidth
-    }, null), createVNode(Bar, {
-      "vertical": true,
-      "move": this.data.moveY,
-      "size": this.data.sizeHeight
-    }, null)]]);
+      [
+        createVNode(
+          'div',
+          {
+            ref: 'wrap',
+            class: [
+              this.wrapClass,
+              'el-scrollbar__wrap',
+              {
+                'el-scrollbar__wrap--hidden-default':
+                  !this.native && !this.gutter
+              }
+            ],
+            onScroll: () => {
+              !this.native && this.handleScroll()
+            },
+            style: this.style
+          },
+          [
+            createVNode(
+              ComponentName,
+              {
+                ref: 'resize',
+                class: ['el-scrollbar__view', this.viewClass],
+                style: this.viewStyle
+              },
+              _isSlot((_slot = this.$slots.default()))
+                ? _slot
+                : {
+                    default: () => [_slot]
+                  }
+            )
+          ]
+        ),
+        !this.native.value && [
+          createVNode(
+            Bar,
+            {
+              move: this.data.moveX,
+              size: this.data.sizeWidth
+            },
+            null
+          ),
+          createVNode(
+            Bar,
+            {
+              vertical: true,
+              move: this.data.moveY,
+              size: this.data.sizeHeight
+            },
+            null
+          )
+        ]
+      ]
+    )
   }
-
-};
+}
 
 /* istanbul ignore next */
 
-ElScrollbar.install = function (app) {
-  app.component(ElScrollbar.name, ElScrollbar);
-};
+ElScrollbar.install = function(app) {
+  app.component(ElScrollbar.name, ElScrollbar)
+}
 
 /* eslint-disable no-undefined,no-param-reassign,no-shadow */
 
@@ -1735,28 +2032,26 @@ function throttle(delay, noTrailing, callback, debounceMode) {
    * `callback` is executed at the proper times in `throttle` and `end`
    * debounce modes.
    */
-  var timeoutID;
-  var cancelled = false; // Keep track of the last time `callback` was executed.
+  var timeoutID
+  var cancelled = false // Keep track of the last time `callback` was executed.
 
-  var lastExec = 0; // Function to clear existing timeout
+  var lastExec = 0 // Function to clear existing timeout
 
   function clearExistingTimeout() {
     if (timeoutID) {
-      clearTimeout(timeoutID);
+      clearTimeout(timeoutID)
     }
   } // Function to cancel next exec
 
-
   function cancel() {
-    clearExistingTimeout();
-    cancelled = true;
+    clearExistingTimeout()
+    cancelled = true
   } // `noTrailing` defaults to falsy.
 
-
   if (typeof noTrailing !== 'boolean') {
-    debounceMode = callback;
-    callback = noTrailing;
-    noTrailing = undefined;
+    debounceMode = callback
+    callback = noTrailing
+    noTrailing = undefined
   }
   /*
    * The `wrapper` function encapsulates all of the throttling / debouncing
@@ -1764,32 +2059,33 @@ function throttle(delay, noTrailing, callback, debounceMode) {
    * is executed.
    */
 
-
   function wrapper() {
-    for (var _len = arguments.length, arguments_ = new Array(_len), _key = 0; _key < _len; _key++) {
-      arguments_[_key] = arguments[_key];
+    for (
+      var _len = arguments.length, arguments_ = new Array(_len), _key = 0;
+      _key < _len;
+      _key++
+    ) {
+      arguments_[_key] = arguments[_key]
     }
 
-    var self = this;
-    var elapsed = Date.now() - lastExec;
+    var self = this
+    var elapsed = Date.now() - lastExec
 
     if (cancelled) {
-      return;
+      return
     } // Execute `callback` and update the `lastExec` timestamp.
 
-
     function exec() {
-      lastExec = Date.now();
-      callback.apply(self, arguments_);
+      lastExec = Date.now()
+      callback.apply(self, arguments_)
     }
     /*
      * If `debounceMode` is true (at begin) this is used to clear the flag
      * to allow future `callback` executions.
      */
 
-
     function clear() {
-      timeoutID = undefined;
+      timeoutID = undefined
     }
 
     if (debounceMode && !timeoutID) {
@@ -1797,17 +2093,17 @@ function throttle(delay, noTrailing, callback, debounceMode) {
        * Since `wrapper` is being called for the first time and
        * `debounceMode` is true (at begin), execute `callback`.
        */
-      exec();
+      exec()
     }
 
-    clearExistingTimeout();
+    clearExistingTimeout()
 
     if (debounceMode === undefined && elapsed > delay) {
       /*
        * In throttle mode, if `delay` time has been exceeded, execute
        * `callback`.
        */
-      exec();
+      exec()
     } else if (noTrailing !== true) {
       /*
        * In trailing throttle mode, since `delay` time has not been
@@ -1820,13 +2116,16 @@ function throttle(delay, noTrailing, callback, debounceMode) {
        * If `debounceMode` is false (at end), schedule `callback` to
        * execute after `delay` ms.
        */
-      timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === undefined ? delay - elapsed : delay);
+      timeoutID = setTimeout(
+        debounceMode ? clear : exec,
+        debounceMode === undefined ? delay - elapsed : delay
+      )
     }
   }
 
-  wrapper.cancel = cancel; // Return the wrapper function.
+  wrapper.cancel = cancel // Return the wrapper function.
 
-  return wrapper;
+  return wrapper
 }
 
 var script$1 = {
@@ -1834,28 +2133,36 @@ var script$1 = {
   props: {
     name: String
   }
-};
-
-function render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("i", {
-    class: normalizeClass(`el-icon-${$props.name}`)
-  }, null, 2
-  /* CLASS */
-  );
 }
 
-script$1.render = render$1;
-script$1.__file = "packages/icon/Icon.vue";
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return (
+    openBlock(),
+    createElementBlock(
+      'i',
+      {
+        class: normalizeClass(`el-icon-${$props.name}`)
+      },
+      null,
+      2
+      /* CLASS */
+    )
+  )
+}
+
+script$1.render = render$1
+script$1.__file = 'packages/icon/Icon.vue'
 
 /* istanbul ignore next */
 
-script$1.install = function (app) {
-  app.component(script$1.name, script$1);
-};
+script$1.install = function(app) {
+  app.component(script$1.name, script$1)
+}
 
-const cubic = value => Math.pow(value, 3);
+const cubic = value => Math.pow(value, 3)
 
-const easeInOutCubic = value => value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2;
+const easeInOutCubic = value =>
+  value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
 
 var script = {
   name: 'ElBacktop',
@@ -1881,134 +2188,159 @@ var script = {
     }
   },
 
-  setup(props, {
-    emit
-  }) {
-    const el = ref(null);
-    const container = ref(null);
-    const visible = ref(null);
-    let throttledScrollHandler;
-    const {
-      visibilityHeight,
-      target,
-      right,
-      bottom
-    } = toRefs(props);
-    const styleBottom = computed(() => `${bottom.value}px`);
-    const styleRight = computed(() => `${right.value}px`);
+  setup(props, { emit }) {
+    const el = ref(null)
+    const container = ref(null)
+    const visible = ref(null)
+    let throttledScrollHandler
+    const { visibilityHeight, target, right, bottom } = toRefs(props)
+    const styleBottom = computed(() => `${bottom.value}px`)
+    const styleRight = computed(() => `${right.value}px`)
 
     const init = () => {
-      container.value = document;
-      el.value = document.documentElement;
+      container.value = document
+      el.value = document.documentElement
 
       if (target.value) {
-        el.value = document.querySelector(target.value);
+        el.value = document.querySelector(target.value)
 
         if (!el.value) {
-          throw new Error(`target is not existed: ${target.value}`);
+          throw new Error(`target is not existed: ${target.value}`)
         }
 
-        container.value = el.value;
+        container.value = el.value
       }
-    };
+    }
 
     const onScroll = () => {
-      const scrollTop = el.value.scrollTop;
-      visible.value = scrollTop >= visibilityHeight.value;
-    };
+      const scrollTop = el.value.scrollTop
+      visible.value = scrollTop >= visibilityHeight.value
+    }
 
     const handleClick = e => {
-      scrollToTop();
-      emit('click', e);
-    };
+      scrollToTop()
+      emit('click', e)
+    }
 
     const scrollToTop = () => {
-      const element = el.value;
-      const beginTime = Date.now();
-      const beginValue = element.scrollTop;
+      const element = el.value
+      const beginTime = Date.now()
+      const beginValue = element.scrollTop
 
-      const rAF = window.requestAnimationFrame || (func => setTimeout(func, 16));
+      const rAF = window.requestAnimationFrame || (func => setTimeout(func, 16))
 
       const frameFunc = () => {
-        const progress = (Date.now() - beginTime) / 500;
+        const progress = (Date.now() - beginTime) / 500
 
         if (progress < 1) {
-          element.scrollTop = beginValue * (1 - easeInOutCubic(progress));
-          rAF(frameFunc);
+          element.scrollTop = beginValue * (1 - easeInOutCubic(progress))
+          rAF(frameFunc)
         } else {
-          element.scrollTop = 0;
+          element.scrollTop = 0
         }
-      };
+      }
 
-      rAF(frameFunc);
-    };
+      rAF(frameFunc)
+    }
 
     onMounted(() => {
-      init();
-      throttledScrollHandler = throttle(300, onScroll);
-      container.value.addEventListener('scroll', throttledScrollHandler);
-    });
+      init()
+      throttledScrollHandler = throttle(300, onScroll)
+      container.value.addEventListener('scroll', throttledScrollHandler)
+    })
     onUnmounted(() => {
-      container.value.removeEventListener('scroll', throttledScrollHandler);
-    });
+      container.value.removeEventListener('scroll', throttledScrollHandler)
+    })
     return {
       visible,
       styleBottom,
       styleRight,
       handleClick
-    };
+    }
   }
-
-};
-
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_el_icon = resolveComponent("el-icon");
-
-  return openBlock(), createBlock(Transition, {
-    name: "el-fade-in"
-  }, {
-    default: withCtx(() => [$setup.visible ? (openBlock(), createElementBlock("div", {
-      key: 0,
-      onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $setup.handleClick && $setup.handleClick(...args), ["stop"])),
-      style: normalizeStyle({
-        right: $setup.styleRight,
-        bottom: $setup.styleBottom
-      }),
-      class: "el-backtop"
-    }, [renderSlot(_ctx.$slots, "default", {}, () => [createVNode(_component_el_icon, {
-      name: "caret-top"
-    })])], 4
-    /* STYLE */
-    )) : createCommentVNode("v-if", true)]),
-    _: 3
-    /* FORWARDED */
-
-  });
 }
 
-script.render = render;
-script.__file = "packages/backtop/Backtop.vue";
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_el_icon = resolveComponent('el-icon')
+
+  return (
+    openBlock(),
+    createBlock(
+      Transition,
+      {
+        name: 'el-fade-in'
+      },
+      {
+        default: withCtx(() => [
+          $setup.visible
+            ? (openBlock(),
+              createElementBlock(
+                'div',
+                {
+                  key: 0,
+                  onClick:
+                    _cache[0] ||
+                    (_cache[0] = withModifiers(
+                      (...args) =>
+                        $setup.handleClick && $setup.handleClick(...args),
+                      ['stop']
+                    )),
+                  style: normalizeStyle({
+                    right: $setup.styleRight,
+                    bottom: $setup.styleBottom
+                  }),
+                  class: 'el-backtop'
+                },
+                [
+                  renderSlot(_ctx.$slots, 'default', {}, () => [
+                    createVNode(_component_el_icon, {
+                      name: 'caret-top'
+                    })
+                  ])
+                ],
+                4
+                /* STYLE */
+              ))
+            : createCommentVNode('v-if', true)
+        ]),
+        _: 3
+        /* FORWARDED */
+      }
+    )
+  )
+}
+
+script.render = render
+script.__file = 'packages/backtop/Backtop.vue'
 
 /* istanbul ignore next */
 
-script.install = function (app) {
-  app.component(script.name, script);
-};
+script.install = function(app) {
+  app.component(script.name, script)
+}
 
-var version = "1.0.0";
+var version = '0.0.2'
 
-const components = [script$2, ElRow, ElScrollbar, script];
+const components = [script$3, ElRow, ElScrollbar, script, script$2]
 
 const install = (app, opts = {}) => {
   //   app.use(setupGlobalOptions(opts))
   components.forEach(component => {
-    app.use(component);
-  });
-};
+    app.use(component)
+  })
+}
 
 const element3 = {
   version,
   install
-};
+}
 
-export { script$2 as ElAlert, script as ElBacktop, ElRow, ElScrollbar, element3 as default, version };
+export {
+  script$3 as ElAlert,
+  script as ElBacktop,
+  script$2 as ElButton,
+  ElRow,
+  ElScrollbar,
+  element3 as default,
+  version
+}

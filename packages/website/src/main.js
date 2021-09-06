@@ -2,7 +2,7 @@ import { createApp, reactive } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 import EntryApp from './app'
-import Element3 from 'base-ui'
+import Element3 from '@geek-tim/base-ui'
 
 import routes from './route'
 import demoBlock from './components/demo-block'
@@ -14,7 +14,7 @@ import title from './i18n/title'
 // 方便在 demo 里面全局导入 element3
 window.Element3 = Element3
 
-import 'base-ui/lib/theme-chalk/index.css'
+import '@geek-tim/base-ui/lib/theme-chalk/index.css'
 import './demo-styles/index.scss'
 import './assets/styles/common.scss'
 import './assets/styles/fonts/style.css'

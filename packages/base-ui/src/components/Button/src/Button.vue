@@ -52,7 +52,7 @@ const useClasses = ({ props, size, disabled }) => {
   })
 }
 
-const useButtonDisabled = (disabled: Ref) => {
+const useButtonDisabled = disabled => {
   return computed(() => {
     const elForm = inject('elForm', null)
 
@@ -60,7 +60,7 @@ const useButtonDisabled = (disabled: Ref) => {
   })
 }
 
-const useButtonSize = (size: Ref) => {
+const useButtonSize = size => {
   const globalConfig = useGlobalOptions()
   return computed(() => {
     const elFormItem = inject('elFormItem', null)

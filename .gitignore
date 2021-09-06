@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/packages/vue-admin/*
 /**/cypress/integration/*
 
 # local env files
