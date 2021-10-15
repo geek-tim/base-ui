@@ -1,6 +1,6 @@
 {
   "name": "@geek-tim/base-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "A Component Library for Vue3",
   "main": "dist/element3-ui.cjs.js",

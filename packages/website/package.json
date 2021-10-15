@@ -8,7 +8,7 @@
     "dev": "vue-cli-service serve src/main.js"
   },
   "dependencies": {
-    "@geek-tim/base-ui": "0.0.2",
+    "@geek-tim/base-ui": "0.0.3",
     "mitt": "^2.1.0",
     "vue": "^3.0.0"
   },

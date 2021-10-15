@@ -1,5 +1,5 @@
 /*!
- * @geek-tim/base-ui v0.0.2
+ * @geek-tim/base-ui v0.0.3
  * (c) 2021 kkb
  * @license MIT
  */
@@ -2403,7 +2403,7 @@ script.install = function(app) {
   app.component(script.name, script)
 }
 
-var version = '0.0.2'
+var version = '0.0.3'
 
 const components = [script$4, ElRow, script$3, ElScrollbar, script, script$2]
 
