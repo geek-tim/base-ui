@@ -30,6 +30,7 @@ const pkgName = '@geek-tim/base-ui'
   step(`\nBuilding ${pkgName}...`)
   await run('yarn', ['workspace', `${pkgName}`, 'build'])
 
+  step(`\n4. Bump version in package.json: `)
   step(`\nUpdate ${pkgName} version...`)
   await run('yarn', [
     'workspace',
@@ -43,8 +44,13 @@ const pkgName = '@geek-tim/base-ui'
   step(`\nUpdating ${pkgName} cross dependencies...`)
   updatePackageVersion(targetVersion)
 
+  // conventionalChangelog 生成变更日志
+  step(`\n5. conventionalChangelog`)
+  await run('yarn', ['changelog'])
+
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
   if (stdout) {
+    step(`\n6. Commit package.json and CHANGELOG.md files`)
     step('\nCommitting changes...')
     await runIfNotDry('git', ['add', '-A'])
     await runIfNotDry('git', ['commit', '-m', `release: v${targetVersion}`])
@@ -52,6 +58,7 @@ const pkgName = '@geek-tim/base-ui'
     console.log('No changes to commit.')
   }
 
+  step(`\n7. publish`)
   step(`\nPublishing ${pkgName} package...`)
 
   await runIfNotDry(
@@ -72,7 +79,10 @@ const pkgName = '@geek-tim/base-ui'
   )
 
   step('\nPushing to GitHub...')
+  step('\n8.Tag')
   await runIfNotDry('git', ['tag', `v${targetVersion}`])
+
+  step('\n9.Push')
   await runIfNotDry('git', [
     'push',
     'origin',
@@ -81,7 +91,6 @@ const pkgName = '@geek-tim/base-ui'
   ])
   await runIfNotDry('git', ['push', 'origin', 'master', '--no-verify'])
 
-  console.log()
   console.log(chalk.green(`Successfully published v${targetVersion}`))
 })()
 

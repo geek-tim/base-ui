@@ -30,3 +30,39 @@ Fork 代码!
 - ci 持续集成
 - types 类型定义文件更改
 - wip 开发中
+
+### Recommended workflow
+
+1. Make changes
+2. Commit those changes
+3. Make sure Travis turns green
+
+4. Bump version in package.json
+5. conventionalChangelog
+6. Commit package.json and CHANGELOG.md files
+7. publish
+
+8. Tag
+9. Push
+
+The reason why you should commit and tag after conventionalChangelog is that the CHANGELOG should be included in the new release, hence gitRawCommitsOpts.from defaults to the latest semver tag.
+
+#### With npm version
+
+Using the npm scripts to our advantage with the following hooks:
+
+```
+{
+  "scripts": {
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+  }
+}
+```
+
+You could follow the following workflow
+
+1. Make changes
+2. Commit those changes
+3. Pull all the tags
+4. Run the npm version [patch|minor|major] command
+5. Push

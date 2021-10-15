@@ -23,6 +23,7 @@ import {
   provide,
   getCurrentInstance,
   h,
+  unref,
   defineComponent,
   inject,
   reactive,
@@ -41,7 +42,7 @@ const TYPE_CLASSES_MAP = {
   warning: 'el-icon-warning',
   error: 'el-icon-error'
 }
-var script$3 = {
+var script$4 = {
   name: 'ElAlert',
   props: {
     title: {
@@ -238,13 +239,13 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
   )
 }
 
-script$3.render = render$3
-script$3.__file = 'packages/alert/Alert.vue'
+script$4.render = render$3
+script$4.__file = 'packages/alert/Alert.vue'
 
 /* istanbul ignore next */
 
-script$3.install = function(app) {
-  app.component(script$3.name, script$3)
+script$4.install = function(app) {
+  app.component(script$4.name, script$4)
 }
 
 var ElRow = {
@@ -311,6 +312,89 @@ var ElRow = {
 
 ElRow.install = function(app) {
   app.component(ElRow.name, ElRow)
+}
+
+var script$3 = {
+  name: 'ElCol',
+  props: {
+    span: {
+      type: Number,
+      default: 24
+    },
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    offset: Number,
+    pull: Number,
+    push: Number,
+    xs: [Number, Object],
+    sm: [Number, Object],
+    md: [Number, Object],
+    lg: [Number, Object],
+    xl: [Number, Object]
+  },
+
+  setup(props, { slots }) {
+    const { tag } = toRefs(props)
+    const gutter = computed(() => {
+      let { parent } = getCurrentInstance()
+
+      while (parent && parent.type.componentName !== 'ElRow') {
+        parent = parent.parent
+      }
+
+      return parent ? parent.props.gutter : 0
+    })
+    return () => {
+      const classList = []
+      const style = {}
+
+      if (unref(gutter)) {
+        style.paddingLeft = unref(gutter) / 2 + 'px'
+        style.paddingRight = style.paddingLeft
+      }
+      ;['span', 'offset', 'pull', 'push'].forEach(prop => {
+        if (unref(toRefs(props)[prop]) || unref(toRefs(props)[prop]) === 0) {
+          classList.push(
+            prop !== 'span'
+              ? `el-col-${prop}-${unref(toRefs(props)[prop])}`
+              : `el-col-${unref(toRefs(props)[prop])}`
+          )
+        }
+      })
+      ;['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+        if (typeof unref(toRefs(props)[size]) === 'number') {
+          classList.push(`el-col-${size}-${unref(toRefs(props)[size])}`)
+        } else if (typeof unref(toRefs(props)[size]) === 'object') {
+          const propsData = unref(toRefs(props)[size])
+          Object.keys(propsData).forEach(prop => {
+            classList.push(
+              prop !== 'span'
+                ? `el-col-${size}-${prop}-${propsData[prop]}`
+                : `el-col-${size}-${propsData[prop]}`
+            )
+          })
+        }
+      })
+      return h(
+        unref(tag),
+        {
+          class: ['el-col', classList],
+          style
+        },
+        slots.default ? slots.default() : ''
+      )
+    }
+  }
+}
+
+script$3.__file = 'packages/col/Col.vue'
+
+/* istanbul ignore next */
+
+script$3.install = function(app) {
+  app.component(script$3.name, script$3)
 }
 
 var props = {
@@ -2321,7 +2405,7 @@ script.install = function(app) {
 
 var version = '0.0.2'
 
-const components = [script$3, ElRow, ElScrollbar, script, script$2]
+const components = [script$4, ElRow, script$3, ElScrollbar, script, script$2]
 
 const install = (app, opts = {}) => {
   //   app.use(setupGlobalOptions(opts))
@@ -2336,9 +2420,10 @@ const element3 = {
 }
 
 export {
-  script$3 as ElAlert,
+  script$4 as ElAlert,
   script as ElBacktop,
   script$2 as ElButton,
+  script$3 as ElCol,
   ElRow,
   ElScrollbar,
   element3 as default,

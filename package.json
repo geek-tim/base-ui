@@ -4,8 +4,10 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "yarn",
+    "build": "yarn workspace @geek-tim/base-ui build",
     "dev#website": "yarn workspace website dev",
-    "lint": "eslint --ext .js --ext .vue --ext .ts packages/element3/packages/** packages/*/src/** --no-error-on-unmatched-pattern",
+    "lint": "eslint --ext .js --ext .vue --ext .ts packages/base-ui/packages/** packages/*/src/** --no-error-on-unmatched-pattern",
     "release": "node scripts/release.js",
     "test": "yarn workspace @geek-tim/base-ui test",
     "cz": "npx git-cz",
